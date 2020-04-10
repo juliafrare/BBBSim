@@ -1,12 +1,8 @@
-from classes.contestant import Contestant
-from classes.cast import Cast
+import classes.cast as cst
 from classes.challenge import Challenge
 
-#part = Contestant("Ana", 26)
-#part.print_name()
-#part.print_age()
-
-cast = Cast(5)
+cast = cst.Cast(5)
+rel = cst.Rel(5)
 
 cast.print_cast()
 

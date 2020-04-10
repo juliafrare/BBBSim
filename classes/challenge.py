@@ -14,8 +14,10 @@ class Challenge:
     def get_winner(self):
         self.winner = self.chall_list[0] #gets the winner from first member of list
 
+#TODO head challenge specifications
 class HeadChallenge:
     pass
 
+#TODO veto challenge specifications
 class VetoChallenge:
     pass
