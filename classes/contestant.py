@@ -1,8 +1,9 @@
 class Contestant:
     #constructor
-    def __init__(self, name, age):
+    def __init__(self, name, age, index):
         self.name = name
         self.age = age
+        self.index = index
         self.elim = False
 
     #prints name of contestant
