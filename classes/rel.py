@@ -91,24 +91,17 @@ class Rel:
 
     #checks if relationship change is inside the boundaries
     def rc_boundary_check(self, a_change, a_index, b_index):
-        if a_change == 0 and self.affinity[a_index][b_index] > 100:
+        if a_change >= 0 and a_change > (100 - self.affinity[a_index][b_index]):
             return True
-        elif a_change == 0 and self.affinity[a_index][b_index] < -100:
-            return True
-        elif a_change > 0 and a_change > (100 - self.affinity[a_index][b_index]):
-            return True
-        elif a_change < 0 and a_change < (-100 - self.affinity[a_index][b_index]):
+        elif a_change <= 0 and a_change < (-100 - self.affinity[a_index][b_index]):
             return True
         return False
 
-    #checks if relationship is inside the boundaries (-100 <= aff <= 100) and corrects to 100
+    #checks if relationship is inside the boundaries (-100 <= aff <= 100) and,
+    #if that's not the case, corrects to 100
     def boundary_check_correct(self, a_index, b_index):
-        if self.affinity[a_index][b_index] > 100:
+        if self.rc_boundary_check(0, a_index, b_index) == True:
             self.affinity[a_index][b_index] = 100
-        elif self.affinity[a_index][b_index] < -100:
-            self.affinity[a_index][b_index] = -100
 
-        if self.affinity[b_index][a_index] > 100:
-            self.affinity[b_index][a_index] = 100
-        elif self.affinity[b_index][a_index] > -100:
+        if self.rc_boundary_check(0, b_index, a_index) == True:
             self.affinity[b_index][a_index] = -100
