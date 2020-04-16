@@ -1,16 +1,10 @@
 import classes.cast as cst
 from classes.challenge import Challenge
+import classes.elimination as el
+import classes.week as wk
 
 cast = cst.Cast(5)
-rel = cst.Rel(5)
 
 cast.print_cast()
 
-chall = Challenge("new challenge")
-chall.generate_results(cast.cast_list, 5)
-chall.get_winner()
-chall.winner.print_name()
-
-#for i in range(5):
-#    cast.append(part)
-#    print(cast[i].name)
+week = wk.Week(cast)
