@@ -13,7 +13,8 @@ class Cast:
             #self.cast_list.append(Contestant("a" + str(i), i))
             name = str(input())
             age = int(input())
-            person = Contestant(name, age)
+            index = i
+            person = Contestant(name, age, index)
             self.cast_list.append(person)
 
     #prints the whole cast's name and age
@@ -22,8 +23,15 @@ class Cast:
             name = self.cast_list[i].name
             age = str(self.cast_list[i].age)
             print(name + ", " + age)
+    
+    def get_cont_by_index(self, index):
+        return self.cast_list[index]
 
     #eliminates a cast member
     def eliminate(self, cont_index):
         self.cast_list[cont_index].elim = True
-        #return self.cast_list.pop(cont_index)
+
+    def reset_weekly_flags(self):
+        for i in range(self.size):
+            self.cast_list[i].nom == False
+            self.cast_list[i].imn == False
