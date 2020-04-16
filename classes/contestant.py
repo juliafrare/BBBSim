@@ -4,8 +4,11 @@ class Contestant:
         self.name = name
         self.age = age
         self.index = index
-        self.elim = False
         self.att = Attributes()
+        #flags
+        self.elim = False
+        self.nom = False
+        self.imn = False
 
     #prints name of contestant
     def print_name(self):
@@ -14,6 +17,10 @@ class Contestant:
     #prints age of contestant
     def print_age(self):
         print(self.age)
+
+    #prints index of contestant
+    def print_index(self):
+        print(self.index)
 
 class Attributes:
     #constructor
