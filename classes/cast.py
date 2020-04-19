@@ -54,40 +54,18 @@ class Cast:
             print(f'Processed {line_count} lines.')
         return line_count - 1
 
-    #gets traits from csv
-    def get_traits_from_csv(self, traits_file):
+    #gets traits/skills from csv
+    def get_attributes_from_csv(self, filename, data_type):
         line_count = 0
-        with open(traits_file) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',')
+        with open(filename) as csv_file:
+            csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
-                if line_count == 0:
-                    print(f'Column names are {", ".join(row)}')
-                    line_count += 1
-                else:
-                    keys = ["extroversion", "temperament", "friendliness", "flirty", "romantic", "playfulness", "loyalty", "neatness"]
-                    values = row
-                    self.cast_list[line_count - 1].att.traits = dict(zip(keys, values))
-                    person = self.cast_list[line_count - 1]
-                    print(f'\t{person.index}. {person.name} has {row[0]} extroversion points.')
-                    line_count += 1
+                if data_type == 't':
+                    self.cast_list[line_count].att.traits = row
+                elif data_type == 's':
+                    self.cast_list[line_count].att.skills = row
+                #person = self.cast_list[line_count]
+                #print(f'\t{person.index}. {person.name} has {person.att.traits["loyalty"]} loyalty points.')
+                line_count += 1
             print(f'Processed {line_count} lines.')
-        return line_count - 1
-
-    #gets skills from csv
-    def get_skills_from_csv(self, skills_file):
-        line_count = 0
-        with open(skills_file) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',')
-            for row in csv_reader:
-                if line_count == 0:
-                    print(f'Column names are {", ".join(row)}')
-                    line_count += 1
-                else:
-                    keys = ["strategy", "strength", "stealth", "endurance", "intelligence", "charisma"]
-                    values = row
-                    self.cast_list[line_count - 1].att.skills = dict(zip(keys, values))
-                    person = self.cast_list[line_count - 1]
-                    print(f'\t{person.index}. {person.name} has {row[0]} strategy points.')
-                    line_count += 1
-            print(f'Processed {line_count} lines.')
-        return line_count - 1
+        return line_count
