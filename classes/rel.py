@@ -57,24 +57,27 @@ class Rel:
         else:
             return False
 
-    #finds the person with highest affinity with a contestant in the cast
-    def find_highest_aff(self, c1):
+    #finds the person with highest affinity with a contestant in the non-eliminated cast
+    def find_highest_aff(self, cast, c1):
         highest = (None, -100)
         for i in range(len(self.affinity[c1])):
-            if i == c1:
+            cont = cast.cast_list[i]
+            if i == c1 or cont.elim == False:
                 pass
             elif self.affinity[c1][i] >= highest[1]:
                 highest = (i, self.affinity[c1][i])
         return highest
 
-    #finds the person with lowest affinity with a contestant in the cast
-    def find_lowest_aff(self, c1):
+    #finds the person with lowest affinity with a contestant in the non-eliminated cast
+    def find_lowest_aff(self, cast, c1, is_nomination):
         lowest = (None, 100)
         for i in range(len(self.affinity[c1])):
-            if i == c1:
+            cont = cast.cast_list[i]
+            if i == c1 or cont.elim == True:
                 pass
             elif self.affinity[c1][i] <= lowest[1]:
-                lowest = (i, self.affinity[c1][i])
+                if is_nomination == False or (cont.imn == False and cont.nom == False):
+                    lowest = (i, self.affinity[c1][i])
         return lowest
 
     #triggers relationship change between two contestants
