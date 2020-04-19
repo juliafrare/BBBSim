@@ -12,7 +12,9 @@ class Nomination:
 
     #gets the nomination from the winner of head challenge
     def get_head_nominee(self, cast, head_index):
-        self.head_nom = cast.get_cont_by_index(cast.rel.find_lowest_aff(head_index)[0])
+        nominee_index = cast.rel.find_lowest_aff(cast, head_index, True)[0]
+        self.head_nom = cast.get_cont_by_index(nominee_index)
+        self.head_nom.nom = True
         return self.head_nom
 
     #gets the house nominee with each contestant's vote
@@ -20,12 +22,13 @@ class Nomination:
         self.vote_count = [0] * cast_size   #vote count for each contestant is stored here
         nom_index = 0 #there is not a nominee yet
         for i in range(cast_size):
-            vote = cast.rel.find_lowest_aff(i)  #vote is defined by affinity
+            vote = cast.rel.find_lowest_aff(cast, i, True)  #vote is defined by affinity
             self.vote_count[vote[0]] += 1
         for i in range(1, cast_size):
             if self.vote_count[nom_index] < self.vote_count[i]:
                 nom_index = i
             self.house_nom = cast.get_cont_by_index(nom_index)
+        self.house_nom.nom = True
         return self.house_nom
 
     def print_nomination(self):
@@ -49,6 +52,7 @@ class Elimination:
         else:
             self.elim = self.nominees[1]
 
+        self.elim.elim = True
         return self.elim
 
     def print_elimination(self):
